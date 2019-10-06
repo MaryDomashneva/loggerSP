@@ -28,7 +28,12 @@ class Parser
     end
   end
 
-  
+  def count_unique_view
+    parsed_logs.inject({}) do |h, (key, value)|
+      h[key] = value.uniq.count
+      h
+    end
+  end
 
   def sort_by_most_popular_pages(pages)
     pages.sort_by {|k, v| -v}
