@@ -1,4 +1,6 @@
-#This calss is responsible for parsing log files
+# frozen_string_literal: true
+
+# This class is responsible for parsing log files
 class Parser
   attr_reader :file_path
   attr_reader :parsed_logs

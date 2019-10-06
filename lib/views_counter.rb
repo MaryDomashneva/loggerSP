@@ -1,26 +1,26 @@
-#this class is responsible for counting page views
+# frozen_string_literal: true
+
+# This class is responsible for counting page views
 class ViewsCounter
-  attr_reader :parsed_file
-
-  def initialize(parsed_file:)
-    @parsed_file = parsed_file
-  end
-
-  def count_page_views
-    parsed_file.inject({}) do |h, (key, value)|
+  def self.count_page_views(parsed_file:)
+    pages = parsed_file.inject({}) do |h, (key, value)|
       h[key] = value.count
       h
     end
+    sort_by_most_popular_pages(pages)
   end
 
-  def count_unique_view
-    parsed_file.inject({}) do |h, (key, value)|
+  def self.count_unique_view(parsed_file:)
+    pages = parsed_file.inject({}) do |h, (key, value)|
       h[key] = value.uniq.count
       h
     end
+    sort_by_most_popular_pages(pages)
   end
 
-  def sort_by_most_popular_pages(pages)
+  private
+
+  def self.sort_by_most_popular_pages(pages)
     pages.sort_by {|k, v| -v}
   end
 end

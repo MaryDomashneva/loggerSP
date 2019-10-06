@@ -25,7 +25,7 @@ RSpec.describe Parser do
       .and_yield(fifth_line)
   end
 
-  describe '#conert_to_hash' do
+  describe '.parse' do
     it 'returns hash with address as key and IP as value' do
       expect(described_class.parse(file_path: WEBLOGS)).to eq converted_hash
     end
