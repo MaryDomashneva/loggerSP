@@ -7,8 +7,7 @@ class Parser
     @parsed_logs = []
   end
 
-  def open_file
-    File.open(file_path)
+  def read_lines_from_file
+    File.readlines(file_path)
   end
-
 end

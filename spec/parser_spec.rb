@@ -4,15 +4,23 @@ RSpec.describe Parser do
   WEBLOGS = 'data/webserver.log'.freeze
 
   let(:subject) { described_class.new(file_path: WEBLOGS) }
-  let(:file_like_object) { double("file like object") }
+  let(:file_like_object) {
+    double(
+      [
+        '/test1/1 333.444.555.666',
+        '/test2 111.222.333.444',
+        '/contact 121.121.121.121'
+      ]
+    )
+  }
 
   before do
-    allow(File).to receive(:open).and_return(file_like_object)
+    allow(File).to receive(:readlines).and_return(file_like_object)
   end
 
-  describe '#open_file' do
-    it 'opens a file from a file path' do
-      expect(subject.open_file).to eq file_like_object
+  describe '#read_lines' do
+    it 'returns array with each line from the file as string' do
+      expect(subject.read_lines_from_file).to eq file_like_object
     end
   end
 
