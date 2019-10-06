@@ -20,4 +20,17 @@ class Parser
     end
     parsed_logs
   end
+
+  def count_page_views
+    parsed_logs.inject({}) do |h, (key, value)|
+      h[key] = value.count
+      h
+    end
+  end
+
+  
+
+  def sort_by_most_popular_pages(pages)
+    pages.sort_by {|k, v| -v}
+  end
 end
