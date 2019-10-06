@@ -2,20 +2,8 @@
 
 # This class is responsible for parsing log files
 class Parser
-  attr_reader :file_path
-  attr_reader :parsed_logs
-
   def self.parse(file_path:)
-    parser = new(file_path)
-    parser.parse
-  end
-
-  def initialize(file_path)
-    @file_path = file_path
-    @parsed_logs = {}
-  end
-
-  def parse
+    parsed_logs = {}
     File.foreach(file_path) do |line|
       split_result = line.split
       url = split_result[0]

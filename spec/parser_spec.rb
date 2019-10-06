@@ -1,4 +1,4 @@
-require_relative '../lib/parser'
+require_relative '../app'
 
 RSpec.describe Parser do
   WEBLOGS = 'data/webserver.log'.freeze
