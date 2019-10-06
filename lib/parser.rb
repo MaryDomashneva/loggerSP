@@ -10,4 +10,11 @@ class Parser
   def read_lines_from_file
     File.readlines(file_path)
   end
+
+  def conert_to_hash
+    read_lines_from_file.inject({}) do |h,elem|
+      h[elem.split[0]] = elem.split[1]
+      h
+    end
+  end
 end
