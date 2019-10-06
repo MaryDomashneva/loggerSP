@@ -1,20 +1,23 @@
 #This calss is responsible for parsing log files
 class Parser
   attr_reader :file_path
+  attr_reader :parsed_logs
 
   def initialize(file_path:)
     @file_path = file_path
-    @parsed_logs = []
-  end
-
-  def read_lines_from_file
-    File.readlines(file_path)
+    @parsed_logs = {}
   end
 
   def conert_to_hash
-    read_lines_from_file.inject({}) do |h,elem|
-      h[elem.split[0]] = elem.split[1]
-      h
+    File.foreach(file_path) do |line|
+      split_result = line.split
+      url = split_result[0]
+      ip = split_result[1]
+
+      ip_addresses = parsed_logs.has_key?(url) ? parsed_logs[url] : []
+      ip_addresses << ip
+      parsed_logs[url] = ip_addresses
     end
+    parsed_logs
   end
 end
